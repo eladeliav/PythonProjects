@@ -3,6 +3,7 @@ import socket
 import sys
 from constants import *
 
+
 class Client(object):
     RECEIVED_FILES_LOCATION = "./ReceivedFiles/"
 
@@ -44,6 +45,16 @@ class Client(object):
         return False
 
     @staticmethod
+    def clear():
+        # windows
+        if os.name == 'nt':
+            os.system('cls')
+        # mac and linux
+        else:
+            os.system('clear')
+
+
+    @staticmethod
     def progress(count, total, status=''):
         """
         Prints out a progress bar
@@ -59,6 +70,7 @@ class Client(object):
 
         sys.stdout.write('\r[%s] %s%s ...%s' % (bar, percents, '%', status))
         sys.stdout.flush()
+        Client.clear()
 
     def receive_multiple_strings(self):
         """
@@ -143,6 +155,8 @@ class Client(object):
                 self.handle_server_response(params)
             else:
                 print 'Illegal command or wrong use of parameters'
+
+        self.shutdown_socket()
         print 'exiting...'
 
     def shutdown_socket(self):

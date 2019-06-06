@@ -2,10 +2,15 @@ import os
 import shutil
 import socket
 import subprocess
-
-from PIL import ImageGrab
-
+import sys
 from constants import *
+
+# linux specific code ( I occasionally write code from a linux computer
+# so I'm using a screen shot alternative import)
+if sys.platform.startswith('linux'):
+    import pyscreenshot as ImageGrab
+else:
+    from PIL import ImageGrab
 
 SERVER_NAME = "Elad's Amazing Server"  # name of server
 
@@ -181,6 +186,7 @@ class Server(object):
         :return: shutdown msg to send to client
         """
         self.connected = False
+        Server.shutdown_socket(self.sock)
         self.server_exit = True
         print CLIENT_DC_MSG
         print 'SHUTTING DOWN CLIENT AND SERVER'
@@ -364,6 +370,9 @@ class Server(object):
 
 
 def main():
+    """
+    Runs Server
+    """
     server = Server(IP, PORT)
     server.run()
 
