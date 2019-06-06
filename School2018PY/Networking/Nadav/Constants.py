@@ -1,0 +1,9 @@
+MESSAGE = "ERROR"
+SOCKET_TIMEOUT = 1
+PORT = 80
+IP = "127.0.0.1"
+MSG_SIZE = 1024
+WEBROOT_PATH = "./webroot/"
+DEFAULT_URL = WEBROOT_PATH + "index.html"
+EOL = "\r\n"
+VERSION = "HTTP/1.1"
